@@ -1,0 +1,33 @@
+<!-- 코드 4-6 객체의 메서드를 실행하는 함수를 만드는 함수 -->
+
+<div class="box" style="position: relative; background: red; width: 50px;
+	    height: 50px;"></div>
+
+<script>
+ var method = function(method) {
+   var args = _.rest(arguments); // [1] 첫 번째 인자를 제외
+   return function(obj) {
+     return obj[method].apply(obj, args.concat(_.rest(arguents))); // [2] 새 인자들 더하기
+   }
+ };
+
+ var bg = method('css', 'background-color');
+
+ var $box = $('.box');
+
+ console.log( bg($box) );
+ // red
+ bg($box, 'yellow');
+ // div.box의 배경색이 yellow로 변경됨
+ bg($box, 'purple');
+ // div.box의 배경색이 purple로 변경됨
+ console.log( bg($box) );
+ // purple
+
+ var fillBlack = method('css', 'background-color', 'black');
+
+ fillBlack($box);
+ // div.box의 배경색이 black을 변경됨
+ console.log( bg($box) );
+ // black
+</script>
