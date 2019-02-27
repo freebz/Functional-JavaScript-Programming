@@ -1,0 +1,42 @@
+<!-- 코드 5-53 비동기 제어 -->
+
+<script>
+function get_users() {
+  return new Promise(function(resolve) {
+    setTimeout(function() {
+      resolve([
+	{ name: "Cojamm", age: 32 },
+	{ name: "JIP", age: 31 },
+	{ name: "Stephen Curry", age 29 }
+      ]);
+    }, 2000);
+  });
+};
+
+_.go(null,
+  _.template$('\
+    ul.users\
+      {{_.go(get_users(), ', _.sum(_.t('user', '\
+	li.user\
+	  .name {{user.name}}\
+ 	  .age {{user.age}}')), ')}}'),
+  function(html) {
+    $('body').append(html)
+  });
+</script>
+
+<!-- 약 2초쯤 뒤 -->
+<ul class="users">
+  <li class="user">
+    <div class="name">Cojamm</div>
+    <div class="age">32</div>
+  </li>
+  <li class="user" >
+    <div class="name">JIP</div>
+    <div class="age">31</div>
+  </li>
+  <li class="user">
+    <div class="name">Stephen Curry</div>
+    <div class="age">29</div>
+  </li>
+</ul>

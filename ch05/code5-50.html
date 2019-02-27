@@ -1,0 +1,26 @@
+<!-- 코드 5-50 문자열과 함수 함께 넘겨 템플릿 함수 만들기 -->
+
+<script>
+var t7 = _.template('list', '\
+  ul\
+    li {{add(list[0], list[1])}}\
+    li\
+      {{_.map(list, ', function(v) {
+        var r = v * 10;
+	return r;
+      }, ').join(", ")}}\
+    li\
+      {{_.reduce(list, ', function(memo, v) {
+	return memo + v;
+      }, ')}}');
+
+$('body').append(
+  t7([1, 2, 3, 4, 5]));
+</script>
+
+<!-- 결과 -->
+<ul>
+  <li>3</li>
+  <li>10, 20, 30, 40, 50</li>
+  <li>15</li>
+</ul>

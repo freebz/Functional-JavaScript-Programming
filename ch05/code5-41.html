@@ -1,0 +1,20 @@
+<!-- 코드 5-41 데이터 치환 Jade 스타일 -->
+
+<script>
+  _.go(
+    { name: "Cojamm", age: 32 },
+    _.template$('\
+      .user\
+        .name {{$.name}}\
+        .age {{$.age}}'),
+    function(html) {
+      $('body').append(html);
+    });
+</script>
+
+<!-- 결과 -->
+
+<div class="user">
+  <div class="name">Cojamm</div>
+  <div class="age">32</div>
+</div>

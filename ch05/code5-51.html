@@ -1,0 +1,10 @@
+<!-- 코드 5-51 -->
+
+<script>
+_.string('s', 'AB{{', function(s) { return s.toUpperCase(); }, '(s)}}DE')('c');
+//1.    인자명, 문자열,                   함수,                      문자열
+//2.                                                                     (함수 실행);
+//3.             {{                   함수 참조              (인자전달))} 
+
+// 결과 ABCDE
+</script>

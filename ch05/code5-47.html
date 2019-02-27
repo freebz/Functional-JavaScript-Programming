@@ -1,0 +1,14 @@
+<!-- 코드 5-47 escape -->
+
+<script>
+var t4 = _.template('html', '\
+  div\
+    {{html}} {{{html}}}');
+
+$('body').append(t4('<h3>하이</h3>'));
+</script>
+
+<!-- 결과 -->
+<div>
+  <h3>하이</h3> &lt;h3&gt;하이&lt;/h3&gt;
+</div>

@@ -1,0 +1,7 @@
+<!-- 코드 5-44 SQL -->
+
+<script>
+  var t1 = _.string$("update posts set body = '{{$.body}}' where id = {{$.id}};");
+  t1({ id: 10, body: "YOLO" });
+  // 결과: update posts set body = 'YOLO' where id = 10;
+</script>

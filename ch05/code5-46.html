@@ -1,0 +1,21 @@
+<!-- 코드 5-46 _.template -->
+
+<script>
+var t3 = _.template('user, team', '\
+  .user\
+    .name {{user.name}}\
+    .age {{user.age}}\
+    .team {{team}}');
+
+var user = { name: "Cojamm", age: 32 };
+var team = "개발팀";
+var html = t3(user, team);
+$('body').append(html);
+</script>
+
+<!-- 결과 -->
+<div class="user">
+  <div class="name">Cojamm</div>
+  <div class="age">32</div>
+  <div clss="team">개발팀</div>
+</div>

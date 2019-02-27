@@ -1,0 +1,13 @@
+<!-- 코드 5-48 코드 실행 -->
+
+<script>
+var t5 = _.template('a, b, bool', '\
+  div\
+    {{ a + b }} {{ bool ? "참" : "거짓" }}');
+
+$('body').append(t5(10, 5, true));
+</script>
+
+<!-- 결과 -->
+
+<div>15 참</div>

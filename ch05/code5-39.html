@@ -1,0 +1,26 @@
+<!-- 코드 5-39 Jade 스타일의 문법 -->
+
+<script>
+  _.pipe(
+    _.template$('\
+      .product_list\
+        ul\
+          li 티셔츠\
+          li 핸드폰 케이스\
+          li 쿠션\
+          li 담요'),
+    function(html) {
+      $('body').append(html);
+    })();
+</script>
+
+<!-- 결과 -->
+
+<div class="product_list">
+  <ul>
+    <li>티셔츠</li>
+    <li>핸드폰 케이스</li>
+    <li>쿠션</li>
+    <li>담요</li>
+  </ul>
+</div>

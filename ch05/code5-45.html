@@ -1,0 +1,11 @@
+<!-- 코드 5-45 _.string -->
+
+<script>
+var t2 = _.string('id, body', // <--- 인자처럼 순서대로 사용할 변수명 지정
+  "update posts set body = '{{body}}' where id = {{id}};");
+
+var id = 10;
+var body = "YOLO";
+t2(id, body); // <--- 순서대로 여러 개의 값을 넘김
+// 결과: update posts set body = 'YOLO' where id = 10;
+</script>

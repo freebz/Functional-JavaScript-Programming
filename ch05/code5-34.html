@@ -1,0 +1,49 @@
+<!-- 코드 5-34 this가 있던 경우 -->
+
+<button type="button" id="save">저장</button>
+
+<script>
+  var save_btn = document.getElementById("save");
+  
+  // 일반 익명 함수
+  save_btn.onmouseover = function() {
+  console.log(this);
+  // <button type="button" id="save">저장</script>  
+  console.log(arguments);
+    // [MosueEvent]
+  };
+
+  // _.pipe여서 button이 담긴 'this'를 내부 모든 함수에서 참조 가능
+  save_btn.onmouseout = _.pipe(
+  function() {
+  console.log(this);
+  // <button type="button" id="save">저장</script>
+  console.log(arguments);
+    // [MouseEvent]
+  },
+  function() {
+  console.log(this);
+  // <button type="button" id="save">저장</script>
+  console.log(arguments);
+    // [undefined]
+  });
+  
+  // _.indent는 내무 모든 함수에서 최초 인자들도 참조 가능
+  save_btn.onclick = _.indent(
+  function() {
+  console.log(this);
+  // <button type="button" id="save">저장</script>
+  console.log(arguments);
+    // [MouseEvent]
+  console.log(this.parent);
+  // <button type="button" id="save">저장</script>
+  console.log(this.arguments);
+    // [MouseEvent]
+  },
+  function() {
+  console.log(this.parent);
+  // <button type="button" id="save">저장</script>
+  console.log(this.arguments);
+    // [MouseEvent]
+  });
+</script>

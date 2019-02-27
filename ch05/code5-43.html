@@ -1,0 +1,21 @@
+<!-- 코드 5-43 데이터 치환 일반 HTML -->
+
+<script>
+  _.go(
+    { name: "Dool", age: 25 },
+    _.string$('\
+      <div class="user">\
+        <div class="name">{{$.name}}</div>\
+        <div class="age">{{$.age}}</div>\
+      </div>'),
+    function(html) {
+      $('body').append(html);
+    });
+</script>
+
+<!-- 결과 -->
+
+<div class="user">
+  <div class="name">Dool</div>
+  <div class="age">25</div>
+</div>
