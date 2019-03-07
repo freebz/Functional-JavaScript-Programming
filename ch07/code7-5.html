@@ -1,0 +1,14 @@
+<!-- 코드 7-5 _.pipe 버전 -->
+
+<script>
+$('#task_app').unbind('click');
+
+$('#task_app').on('click', '> button.remove', _.pipe(
+  function() { return $('#task_app .task_list input:checked'); },
+  _.map(function(input) { return input.closest('li'); }),
+  _tap(
+    _.map(function(li) { return parseInt(li.getAttribute('task_id')); }),
+    _($.post, '/api/remove_tasks')),
+  function(lis) { $(lis).remove(); }
+});
+</script>

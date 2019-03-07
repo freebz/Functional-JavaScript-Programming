@@ -1,0 +1,64 @@
+<!-- 코드 7-13 -->
+
+<script>
+function is_numeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+function numeric_to_int(n) {
+  return is_numeric(n) ? parseFloat(n) : n;
+}
+
+_.if_arr_map = function(val, iter) {
+  return _.is_array(val) ? _.map(val, iter) : iter(val);
+};
+
+$.val = function(input) {
+  if (input.type == "checkbox") return input.checked;
+  return input.nodeName == 'SELECT' || _.contains(['radio', 'umber'], input.type) ?
+    _.if_arr_map($(input).val(), numeric_to_int) : $(input).val()
+};
+
+var inputs_to_obj = _.pipe(
+  _.reject(function(input) { return input.type == "radio" && !input.checked; }),
+  _.all(_.pluck("name"), _.map($.val)),
+  _.object);
+
+console.log(
+  JSON.stringify(form_to_obj($('form'))));
+// {"email":"marpple@gmail.com","nickname":"Cojamm","title":"하이!",
+//  "age":20,"body":"안녕하세요!","type":2,"categories":[1,3],"bool":false}
+
+var inputs_to_obj = _.pipe(
+  _.reject(function(input) { return input.type == "radio" && !input.checked; }),
+  _.map(_.all(_.v('name'), $.val)),
+  _.object);
+
+console.log(
+  JSON.stringify(form_to_obj($('form'))));
+// {"email":"marpple@gmail.com","nickname":"Cojamm","title":"하이!",
+//  "age":20,"body":"안녕하세요!","type":2,"categories":[1,3],"bool":false}
+
+function inputs_to_obj(inputs) {
+  return _.reduce(inputs, function(obj, input) {
+    if (input.type == "radio" && !input.checked) return obj;
+    obj[input.name] = $.val(input);
+    return obj;
+  }, {});
+}
+
+console.log(
+  JSON.stringify(form_to_obj($('form'))));
+// {"email":"marpple@gmail.com","nickname":"Cojamm","title":"하이!",
+//  "age":20,"body":"안녕하세요!","type":2,"categories":[1,3],"bool":false}
+
+var inputs_to_obj = _.reduce(function(obj, input) {
+  return input.type == "radio" && !input.checked ?
+	               obj : obj[input.name] = $.val(input), obj;
+}, _.object);
+
+console.log(
+  JSON.stringify(form_to_obj($('form'))));
+// {"email":"marpple@gmail.com","nickname":"Cojamm","title":"하이!",
+//  "age":20,"body":"안녕하세요!","type":2,"categories":[1,3],"bool":false}
+</script>

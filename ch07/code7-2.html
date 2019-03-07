@@ -1,0 +1,13 @@
+<!-- 코드 7-2 -->
+
+<script>
+function hi2(list) {
+  return _.each(list, console.log);
+}
+hi2(undefined); // 실행이 안 되고 에러도 안 난다
+hi([1]);        // 1 0 [1]
+
+var hi3 = _.each(console.log);
+hi3(undefined); // 실행이 안 되고 에러도 안 난다
+hi3([1]);       // 1 0 [1]
+</script>

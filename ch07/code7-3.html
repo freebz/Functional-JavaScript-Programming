@@ -1,0 +1,28 @@
+<!-- 코드 7-3 task_app -->
+
+<div id="task_app">
+  <button type="button" class="remove">삭제</button>
+  <ul class="task_list">
+    <li task_id="3">
+      <input type="checkbox" checked>
+    </li>
+    <li task_id="2">
+      <input type="checkbox" checked>
+    </li>
+  </ul>
+</div>
+
+<script>
+$('#task_app').on('click', '> button.remove', function() {
+  var $inputs = $('#task_app .task_list input:checked');
+  var lis = _.map($inputs, function(input) {
+    return input.closest('li');
+  });
+  var ids = _.map(lis, function(li) {
+    return parseInt(li.getAttribute('task_id'));
+  });
+  $.post('/api/remove_tasks', ids).then(function() {
+    $(lis).remove();
+  });
+});
+</script>

@@ -1,0 +1,29 @@
+<!-- 코드 7-12 -->
+
+<script>
+var inputs_to_obj = _.pipe(
+  _.reject(function(input) { return input.type == "radio" && !input.checked; }),
+  _.all(_.pluck("name"),
+    _.map(function(input) {
+      return input.type == "checkbox" ? input.checked : $(input).val();
+    })),
+  _.object);
+
+console.log(
+  JSON.stringify(form_to_obj($('form'))));
+// {"email":"marpple@gmail.com","nickname":"Cojamm","title":"하이!","age":"20",
+//  "body":"안녕하세요!","type":"2","categories":["1","3"],"bool":false}
+
+var inputs_to_obj = _.pipe(
+  _.reject(function(input) { return input.type == "radio" && !input.checked; }),
+  _.partition(function(input) { return input.type == "checkbox" }), _.to_mr,
+  _.spread(
+    __(_.map(function(input) { return [input.name, input.checked]; }), _.object),
+    __(_.map(function(input) { return [input.name, $(input).val()]; }), _.object)),
+  _.extend);
+
+console.log(
+  JSON.stringify(form_to_obj($('form'))));
+// {"bool":false,"email":"marpple@gamil.com","nickname":"Cojamm",
+//  "title":"하이!","age":"20","body":"안녕하세요!","type":"2","categories":["1","3"]}
+</script>

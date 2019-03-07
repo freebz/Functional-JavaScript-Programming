@@ -1,0 +1,12 @@
+<!-- 코드 7-1 -->
+
+<script>
+function hi(list) {
+  if (list && list.forEach) { // 이 if문이 없다면, null 등의 값이 오면 에러가 날 수 있음
+    list.forEach(console.log);
+    return list;
+  }
+}
+hi(undefined); // if문에 걸려 실행이 안됨
+hi([1]);       // 1 0 [1]
+</script>

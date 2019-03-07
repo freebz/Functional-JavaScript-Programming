@@ -1,0 +1,44 @@
+<!-- 코드 7-11 -->
+
+<form>
+  <input type="email" name="email" value="marpple@gmail.com">
+  <input type="text" name="nickname" value="Cojamm">
+  <input type="text" name="title" value="하이!">
+  <input type="number" name="age" value="20">
+  <textarea name="body">안녕하세요!</textarea>
+  <input type="radio" name="type" value="1">
+  <input type="radio" name="type" value="2" checked>
+  <select name="categories" multiple>
+    <option value="1" selected>1</option>
+    <option value="2">2</option>
+    <option value="3" selected>3</option>
+  </select>
+  <input type="checkbox" name="bool">
+</form>
+
+<script>
+function inputs_to_obj(inputs) {
+  return _.reduce(inputs, function(obj, input) {
+    if (input.type == "radio" && !input.checked) return obj;
+    if (input.type == "checkbox") {
+      obj[input.name] = input.checked;
+    } else {
+      obj[input.name] = $(input).val();
+    }
+    return obj;
+  }, {});
+}
+
+function form_to_obj($parent) {
+  return inputs_to_obj($('[name]', $parent));
+}
+
+console.log(
+  JSON.stringify(inputs_to_obj($('select, textarea'))));
+// {"body":"안녕하세요!","categories":["1","3"]}
+
+console.log(
+  JSON.stringify(form_to_obj($('form'))));
+// {"email":"marpple@gmail.com","nickname":"Cojamm","title":"하이!","age":20
+//  "body":안여하세요!","type":"2","categories":["1","3"],"bool":false}
+</script>
